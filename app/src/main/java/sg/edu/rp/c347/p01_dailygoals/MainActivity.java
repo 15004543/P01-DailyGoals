@@ -58,43 +58,42 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        // Getting Files
         RadioGroup rg1 = (RadioGroup) findViewById(R.id.radioGroup1);
         int selectedButtonId1 = rg1.getCheckedRadioButtonId();
-
         RadioGroup rg2 = (RadioGroup) findViewById(R.id.radioGroup2);
         int selectedButtonId2 = rg2.getCheckedRadioButtonId();
-
         RadioGroup rg3 = (RadioGroup) findViewById(R.id.radioGroup3);
         int selectedButtonId3 = rg3.getCheckedRadioButtonId();
-
         EditText etReflection = (EditText) findViewById(R.id.editText);
-
         String strReflect = etReflection.getText().toString();
+        //Saving
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor prefEdit = prefs.edit();
+        //Saving the Data
         prefEdit.putInt("RB1", selectedButtonId1);
         prefEdit.putInt("RB2", selectedButtonId2);
         prefEdit.putInt("RB3", selectedButtonId3);
         prefEdit.putString("etRef", strReflect);
+        //Commit
         prefEdit.commit();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        //Get Data
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int crb1 = prefs.getInt("RB1", 0);
         int crb2 = prefs.getInt("RB2", 0);
         int crb3 = prefs.getInt("RB3", 0);
         String strDT = prefs.getString("etRef", "");
+        //Getting the Views
         RadioGroup rg1 = (RadioGroup) findViewById(R.id.radioGroup1);
-
         RadioGroup rg2 = (RadioGroup) findViewById(R.id.radioGroup2);
-
         RadioGroup rg3 = (RadioGroup) findViewById(R.id.radioGroup3);
-
         EditText etReflection = (EditText) findViewById(R.id.editText);
-
+        //Setting back to the Views
         etReflection.setText(strDT);
         rg1.check(crb1);
         rg2.check(crb2);
